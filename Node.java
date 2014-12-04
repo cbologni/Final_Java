@@ -1,3 +1,5 @@
+//Chrissy Bolognino
+//Jackie Horton
 public class Node {
   private Object item;
   private Node next;

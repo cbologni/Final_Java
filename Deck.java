@@ -1,4 +1,10 @@
 import java.util.Random; 
+
+/*
+Chrissy Bolognino
+CS 110
+Deck Class
+*/
   
 public class Deck  
 {  
@@ -23,24 +29,24 @@ public class Deck
      
     public void shuffle() 
     {  
-       int randomCard; 
        int j = 51; 
        Card c, c2; 
        Random rand = new Random(); 
+       int random;
        //for loop to switch cards around 
        for (int i = 1; i < deck.size(); i++) 
        { 
         
-         randCard = rand.nextInt(j)+1; 
+         random = rand.nextInt(j)+1; 
          c = (Card)(deck.get(i)); 
-         c2 = (Card)(deck.get(randCard)); 
+         c2 = (Card)(deck.get(random)); 
            
           //removes card 
           deck.remove(i); 
-          deck.remove(randomCard); 
+          deck.remove(random); 
           //adds card 
           deck.add(i,c2); 
-          deck.add(randomCard,c); 
+          deck.add(random,c); 
            
        }       
     } 

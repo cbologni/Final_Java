@@ -2,18 +2,24 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+Chrissy Bolognino
+CS 110
+War GUI
+**/
+
 public class GUI extends JFrame
 {
    private Card c1, c2;
-   private War war;
+   private GameOfWar war;
    private ListArrayListBased list;
    
    private static final int TWO = 2;
    
    //labels and variables for images
    private JLabel play1, play2;
-   private JLabel l1, l2, l3, l4;
-   private ImageIcon frontOne, frontTwo, back;
+   private JLabel q1, q2, q3, q4;
+   private ImageIcon front1, front2, back;
       
    //sections, buttons, and main title and game
    private JPanel p1, p2, p3, p4, p5, p6;
@@ -24,8 +30,7 @@ public class GUI extends JFrame
    public GUI()
    {
       //new war game class object
-      war = new War();
-      //new ArrayListBased list
+      war = new GameOfWar();      //new ArrayListBased list
       list = new ListArrayListBased();
       
       //create GUI set up using gridLayout
@@ -33,22 +38,22 @@ public class GUI extends JFrame
       //war = new War();
       
       p1 = new JPanel(new FlowLayout(FlowLayout.CENTER,45,45));//set this panel's location
-      p1.setBackground(Color.BLACK);//color black
+      p1.setBackground(Color.RED);//color red
       
       p2 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,45));//set this panel's location
-      p2.setBackground(Color.BLACK);//color black
+      p2.setBackground(Color.RED);//color red
       
       p3 = new JPanel(new FlowLayout(FlowLayout.CENTER,45,45));//set this panel's location
-      p3.setBackground(Color.BLACK);//color black
+      p3.setBackground(Color.RED);//color red
       
       p4 = new JPanel(new FlowLayout(FlowLayout.CENTER,45,45));//set this panel's location
-      p4.setBackground(Color.BLACK);//color black
+      p4.setBackground(Color.RED);//colorred
       
       p5 = new JPanel(new FlowLayout(FlowLayout.CENTER,45,10));//set this panel's location
-      p5.setBackground(Color.BLACK);//color black
+      p5.setBackground(Color.RED);//color red
       
       p6 = new JPanel(new FlowLayout(FlowLayout.CENTER,45,45));//set this panel's location
-      p6.setBackground(Color.BLACK);//color black
+      p6.setBackground(Color.RED);//color red
       
       //main title piece  
       main = new JLabel(war.toString());//the main title will be gotten via the war toString method
@@ -70,17 +75,17 @@ public class GUI extends JFrame
       b2.setEnabled(false);
       
       //images set to back
-      back = new ImageIcon("cardPics/back.jpg");
-      11 = new JLabel(back);
-      12 = new JLabel(back);
-      13 = new JLabel(back);
-      14 = new JLabel(back);
+      back = createImageIcon("Cards\\back.jpg","");
+      q1 = new JLabel(back);
+      q2 = new JLabel(back);
+      q3 = new JLabel(back);
+      q4 = new JLabel(back);
       
       //add these
-      p1.add(l1);
-      p3.add(l2);
-      p4.add(l3);
-      p6.add(l4);
+      p1.add(q1);
+      p3.add(q2);
+      p4.add(q3);
+      p6.add(q4);
       add(p1);
       add(p2);
       add(p3);
@@ -95,8 +100,8 @@ public class GUI extends JFrame
    public void flipIt()
    {
       //cards
-      c1 = game.draw(1);
-      c2 = game.draw(2);
+      c1 = war.draw(1);
+      c2 = war.draw(2);
       
       //compares battle scores
       if(c1.compareTo(c2) == 1)
@@ -104,7 +109,7 @@ public class GUI extends JFrame
          war.add(1,c1,c2);//add card to u pile
         
          main.setText(war.toString());//use toString
-         game.setText("you win a battle");//print reults                   
+         game.setText("\nyou win a battle");//print reults                   
       }
       
       else if(c1.compareTo(c2) == -1)
@@ -112,12 +117,12 @@ public class GUI extends JFrame
         war.add(2,c1,c2);//add card to comp pile
 
         main.setText(war.toString());//use toString
-        game.setText("you lose the battle");//print results
+        game.setText("\nyou lose the battle");//print results
       }
       
       else if(c1.compareTo(c2) == 0)//else if they are the same
       {
-         game.setText("WAR");//go to war
+         game.setText("\nWAR");//go to war
          
          list.add(1, c1);//add c1
          list.add(2, c2);//add c2
@@ -136,20 +141,19 @@ public class GUI extends JFrame
       //actionPerformed method
       public void actionPerformed(ActionEvent e)
       {
-         if(!war.ifEmpty(1) && !war.isEmpty(2))//if not empty
+         if(!war.ifEmpty(1) && !war.ifEmpty(2))//if not empty
          {
             //go to flip method
             flipIt();
             //set images
-            String string = "cardPics/"+c1+".jpg";
-            front1 = new ImageIcon(string);
-            front2 = new ImageIcon("cardPics/"+c2+".jpg");
+            front1 = createImageIcon("Cards\\"+c1+".jpg","");
+            front2 = createImageIcon("Cards\\"+c2+".jpg","");
   
-            l1.setIcon(front1);//display image
-            l2.setIcon(front2);//display image
+            q1.setIcon(front1);//display image
+            q2.setIcon(front2);//display image
 
          }
-         else if (war.isEmpty(1))//if user out of cards
+         else if (war.ifEmpty(1))//if user out of cards
          {
             //diplay loss message
             game.setText("You lost, computer wins");
@@ -157,7 +161,7 @@ public class GUI extends JFrame
             b1.setEnabled(false);//disable b1
             b2.setEnabled(false);//disable b2
          }
-         else if (war.isEmpty(2))//if comp out of cards
+         else if (war.ifEmpty(2))//if comp out of cards
          {
             //display message
             game.setText("Computer lost, you win");
@@ -203,16 +207,16 @@ public class GUI extends JFrame
                  if(c3.compareTo(c4) == 1)
                  {
                      //find and set images
-                     front1 = new ImageIcon("cardPics/"+c3+".jpg");
-                     front2 = new ImageIcon("cardPics/"+c4+".jpg");
-                     l1.setIcon(front1);
-                     l2.setIcon(front2);
+                     front1 = createImageIcon("Cards\\"+c3+".jpg","");
+                     front2 = createImageIcon("Cards\\"+c4+".jpg","");
+                     q1.setIcon(front1);
+                     q2.setIcon(front2);
                     
                      Card c5;//temporary object to use
                      
                      for(int i=1; i<=list.size(); i++)//for loop to go through list
                      {
-                        c5 = (Card)(war.get(i));
+                        c5 = (Card)(list.get(i));
                         war.add(1, c5);//add temporary Card
                      }
                      list.removeAll();//removeAll
@@ -226,10 +230,10 @@ public class GUI extends JFrame
                  //in order for comp to win:
                  if(c3.compareTo(c4) == -1)
                  {
-                     front1 = new ImageIcon("cardPics/"+c3+".jpg");
-                     front2 = new ImageIcon("cardPics/"+c4+".jpg");
-                     l1.setIcon(front1);
-                     l2.setIcon(front2);
+                     front1 = createImageIcon("Cards\\"+c3+".jpg","");
+                     front2 = createImageIcon("Cards\\"+c4+".jpg","");
+                     q1.setIcon(front1);
+                     q2.setIcon(front2);
                      
                      Card c5;//temporary object
                      
@@ -248,10 +252,10 @@ public class GUI extends JFrame
                  }
                  else//if same
                  {
-                     front1 = new ImageIcon("cardPics/"+c3+".jpg");
-                     front2 = new ImageIcon("cardPics/"+c4+".jpg");
-                     l1.setIcon(front1);
-                     l2.setIcon(front2);
+                     front1 = createImageIcon("Cards\\"+c3+".jpg","");
+                     front2 = createImageIcon("Cards\\"+c4+".jpg","");
+                     q1.setIcon(front1);
+                     q2.setIcon(front2);
                      
                      w = 0;//w=0 continues the do while loop
                      
@@ -275,6 +279,22 @@ public class GUI extends JFrame
                }  
          }while (w < 1); //do while continues while w < 1
       }
+      
+              
    }
   }
+  private ImageIcon createImageIcon(String p, String d)
+      {
+         java.net.URL imgURL = getClass().getResource(p);
+         if (imgURL!=null)
+         {
+            return new ImageIcon(imgURL, d);
+         }
+         else
+         {
+            System.err.println("Could not find path");
+            return null;
+         }
+      }
+
 }

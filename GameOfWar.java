@@ -7,14 +7,14 @@ WarGame class to play the game
 public class GameOfWar
 {
    private Deck d;
-   private Pile p1, p2;
+   private Hand p1, p2;
  
  //constructor
    public GameOfWar()
    {
       d = new Deck();
-      p1 = new Pile(d);
-      p2 = new Pile(d);
+      p1 = new Hand(d);
+      p2 = new Hand(d);
    }
    
    /**
@@ -80,7 +80,7 @@ public class GameOfWar
       @param int
       @return size
    */
-   public int pileSize(int i)
+   public int size(int i)
    {
       if (i==1)
          return p1.size();
@@ -125,7 +125,7 @@ public class GameOfWar
    {
       String string1 = "Your score was " + p1.size();
       String string2 = "Computer score was " + p2.size();
-      return string + "*********" + string2;
+      return string1 + "            " + string2;
    }
 
    

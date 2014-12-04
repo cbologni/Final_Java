@@ -1,3 +1,5 @@
+//Chrissy Bolognino
+//Jackie Horton
 // ********************************************************
 // Interface ListInterface for the ADT list.
 // *********************************************************

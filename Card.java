@@ -1,3 +1,9 @@
+/**
+Chrissy Bolognino
+CS 110
+Card Class
+**/
+
 public class Card  
 {      
     
@@ -35,7 +41,7 @@ public class Card
      } 
        
     //@return the suit 
-     public String getSuitAsString()  
+     public String getSuitString()  
      { 
              // Return a String representing the card's suit. 
              // (If the card's suit is invalid, "??" is returned.) 
@@ -56,7 +62,7 @@ public class Card
       
     //@return rank as string 
     
-    public String getRankAsString()  
+    public String getRankString()  
     { 
          switch (rank) 
          { 
@@ -117,7 +123,7 @@ public class Card
          else if (suit == CLUBS) 
              suitString = "c"; 
               
-         String str = sRank + sSuit; 
+         String str = rankString + suitString; 
          return str; 
      } 
       
@@ -133,6 +139,8 @@ public class Card
        else 
           return 0; 
     } 
+    
+   
  } 
       
  

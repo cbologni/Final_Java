@@ -1,3 +1,8 @@
+/*
+Chrissy Bolognino
+CS 110
+Hand class
+*/
 public class Hand extends Deck
 {
 
@@ -31,8 +36,8 @@ public class Hand extends Deck
    }
    /**
       adds card to pile
-      @param int 
-      @param Card
+      @param index 
+      @param card
    */
    public void add(int index, Card card)
    {
